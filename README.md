@@ -1,15 +1,15 @@
-#HashMap
+# HashMap
 
 为python创建的hashmap
 
-##使用方法
+## 使用方法
 
 ### 安装
 ```bash
 pip install thzhashmap
 ```
 
-###使用
+### 使用
 ```python
 from thzhashmap import PyHashMap
 hmap = PyHashMap()
