@@ -11,7 +11,7 @@ pip install thzhashmap
 
 ### 使用
 ```python
-from thzhashmap import PyHashMap
+from hashmap import PyHashMap #please notice the package name
 hmap = PyHashMap()
 #插入
 hmap.put("用户名","I am github cor edev")

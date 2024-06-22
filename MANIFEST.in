@@ -1,0 +1,3 @@
+include thzhashmap/*
+include setup.py
+include README.md

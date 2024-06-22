@@ -26,7 +26,7 @@ cdef class PyHashMap:
         self.c_map.put(key.encode(), val.encode())
     
     def get(self, str key):
-        return self.c_map.get(key.encode())
+        return self.c_map.get(key.encode()).decode()
     
     def remove(self, str key):
         self.c_map.remove(key.encode())
