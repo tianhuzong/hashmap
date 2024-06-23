@@ -27,7 +27,7 @@ jobs:
           python -m pip install --upgrade pip
           pip install wheel Cython setuptools
           python setup.py bdist_wheel
-        continue-on-error: true
+        continue-on-error: false
         shell: bash
 
       - name: Check if package is built
