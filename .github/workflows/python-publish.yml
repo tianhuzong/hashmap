@@ -24,7 +24,7 @@ jobs:
     - name: Install dependencies and build package
       run: |
         python -m pip install --upgrade pip
-        pip install wheel Cython
+        pip install wheel Cython setuptools
         python setup.py bdist_wheel
 
     - name: Create Release
