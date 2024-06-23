@@ -34,6 +34,8 @@ jobs:
         run: |
           if [ ! -f "dist/*.whl" ]; then
             echo "Error: Python package not found"
+            echo `ls`
+            echo `ls dist`
             exit 1
           fi
         shell: bash
