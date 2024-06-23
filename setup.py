@@ -1,4 +1,4 @@
-from setuptools import setup
+﻿from setuptools import setup
 from setuptools.extension import Extension
 from Cython.Build import cythonize
 with open("./README.md",mode='r',encoding='utf-8') as f:
@@ -8,8 +8,7 @@ extensions = [
         "hashmap",
         sources=["thzhashmap/hashmap.pyx", "thzhashmap/hashmap_c.cpp","thzhashmap/__init__.pyx"],
         language="c++",
-        extra_compile_args=["-fmax-include-depth=300"] ,
-    )
+            )
 ]
 
 setup(
