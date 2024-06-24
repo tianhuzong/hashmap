@@ -2,8 +2,8 @@ name: Upload Python Package with Tag Release
 
 on:
   push:
-    branches:
-      - main
+    tags:
+      - '*'
 
 jobs:
   build_and_deploy:
@@ -27,18 +27,24 @@ jobs:
           python -m pip install --upgrade pip
           pip install wheel Cython setuptools
           python setup.py bdist_wheel
-        continue-on-error: false
-        shell: bash
 
       - name: Check if package is built
         run: |
-          if [ ! -f "dist/*.whl" ]; then
-            
-            echo `ls`
-            echo `ls dist`
-           
+          if [[ ! -f dist/*.whl ]]; then
+            echo "No wheel file found in dist directory"
+            exit 1
           fi
         shell: bash
+
+      - name: Read release notes
+        id: read_notes
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const fs = require('fs');
+            const notes = fs.readFileSync('notes.txt', 'utf8');
+            return notes;
+        result-encoding: string
 
       - name: Create Release
         id: create_release
@@ -47,10 +53,9 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: v1.0.3  # 指定你要创建的 tag 名称，可以根据需要修改
-          release_name: Release v1.0.3  # 标签的显示名称
-          body: |
-            Release notes for version 1.0.3 go here.  # 发布说明
+          tag_name: ${{ github.ref_name }}  # 使用推送的标签名称
+          release_name: Release ${{ github.ref_name }}
+          body: ${{ steps.read_notes.outputs.result }}
           files: dist/*
 
       - name: Publish to PyPI
