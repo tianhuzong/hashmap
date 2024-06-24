@@ -46,7 +46,7 @@ jobs:
       - name: Download all artifacts
         uses: actions/download-artifact@v2
         with:
-          name: '**'
+          name: '*'
           path: dist/
 
       - name: Read release notes
@@ -55,7 +55,7 @@ jobs:
         with:
           script: |
             const fs = require('fs');
-            const notes = fs.readFileSync('notes.txt', 'utf8');
+            const notes = fs.readFileSync('notes.txt', 'UTF-8');
             return notes;
 
       - name: Create Release
@@ -65,7 +65,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           tag_name: ${{ github.ref_name }}  # 使用推送的标签名称
-          release_name: Release ${{ github.ref_name }}
+          
           body: ${{ steps.read_notes.outputs.result }}
           files: dist/**/*
 
@@ -79,7 +79,7 @@ jobs:
       - name: Download artifacts from the release
         uses: actions/download-artifact@v2
         with:
-          name: '**'
+          name: '*'
           path: dist/
 
       - name: Publish to PyPI
