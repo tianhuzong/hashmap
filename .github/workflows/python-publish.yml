@@ -44,7 +44,7 @@ jobs:
             const fs = require('fs');
             const notes = fs.readFileSync('notes.txt', 'utf8');
             return notes;
-        result-encoding: string
+        
 
       - name: Create Release
         id: create_release
