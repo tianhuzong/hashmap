@@ -48,7 +48,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           tag_name: ${{ github.ref_name }}  # 使用推送的标签名称
-          release_name: Release ${{ github.ref_name }}
+          token: ${{secrets.GITHUB_TOKEN}}
           body: ${{ steps.read_notes.outputs.result }}
           files: dist/*
 
