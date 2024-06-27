@@ -38,11 +38,14 @@ jobs:
       - name: 看看文件
         id: ls_files
         run: |
-          ls
-          ls dist
+          ls;
+          ls dist -lah
 
   create_release:
     runs-on: ubuntu-latest
+    matrix:
+        os: [windows-latest, ubuntu-latest, macos-latest]
+        python-version: ['3.8', '3.9', '3.10', '3.11', '3.12']
     needs: build
     steps:
       - name: Checkout code
@@ -52,7 +55,7 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
-          
+          name: dist-${{ matrix.os }}-${{ matrix.python-version }}
           path: dist/
 
       - name: Read release notes
@@ -66,8 +69,8 @@ jobs:
       - name: 看看文件2
         id: ls_files2
         run: |
-          ls
-          ls dist
+          ls;
+          ls dist -lah
 
       - name: Create Release
         id: create_release
