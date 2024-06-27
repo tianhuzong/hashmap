@@ -35,6 +35,11 @@ jobs:
         with:
           name: dist-${{ matrix.os }}-${{ matrix.python-version }}
           path: dist/*.whl
+      - name: 看看文件
+        id: ls_files
+        run: |
+          ls
+          ls dist
 
   create_release:
     runs-on: ubuntu-latest
@@ -46,7 +51,7 @@ jobs:
       - name: Download all artifacts
         uses: actions/download-artifact@v4
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
           
           path: dist/
 
@@ -58,8 +63,8 @@ jobs:
             const fs = require('fs');
             const notes = fs.readFileSync('notes.txt', 'UTF-8');
             return notes;
-      - name: 看看文件
-        id: ls_files
+      - name: 看看文件2
+        id: ls_files2
         run: |
           ls
           ls dist
