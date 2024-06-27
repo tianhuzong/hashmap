@@ -62,6 +62,10 @@ jobs:
       - name: Create Release
         id: create_release
         uses: softprops/action-gh-release@v1
+        run: |
+          ls;
+          ls dist
+
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
@@ -78,9 +82,8 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Download artifacts from the release
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v4
         with:
-          name: '*'
           path: dist/
 
       - name: Publish to PyPI
