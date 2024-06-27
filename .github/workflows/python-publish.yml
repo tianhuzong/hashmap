@@ -58,13 +58,15 @@ jobs:
             const fs = require('fs');
             const notes = fs.readFileSync('notes.txt', 'UTF-8');
             return notes;
+      - name: 看看文件
+        id: ls_files
+        run: |
+          ls
+          ls dist
 
       - name: Create Release
         id: create_release
         uses: softprops/action-gh-release@v1
-        run: |
-          ls;
-          ls dist
 
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -73,6 +75,7 @@ jobs:
           
           body: ${{ steps.read_notes.outputs.result }}
           files: dist/**/*
+      
 
   publish_to_pypi:
     runs-on: ubuntu-latest
