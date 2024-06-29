@@ -57,7 +57,7 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
-          name: dist-${{ matrix.os }}-${{ matrix.python-version }}
+          #name: dist-${{ matrix.os }}-${{ matrix.python-version }}
           path: dist/
 
       - name: Read release notes
