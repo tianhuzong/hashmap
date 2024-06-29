@@ -28,11 +28,12 @@ jobs:
           pip install wheel Cython setuptools
           python setup.py bdist_wheel
       - name: fix_linux_wheel
-        if: runner.os == 'Linux' && matrix.runs-on == 'ubuntu-latest'
+        if: runner.os == 'Linux' && matrix.os == 'ubuntu-latest'
         run: |
           pip install auditwheel
           auditwheel repair dist/ThzHashMap-*-*-*-linux_*.whl
-          ls
+          ls -lah
+          ls dist
 
 
       - name: Upload artifact
