@@ -10,7 +10,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [windows-latest, macos-latest]
+        os: [windows-latest, ubuntu-latest, macos-latest]
         python-version: ['3.8', '3.9', '3.10', '3.11', '3.12']
 
     steps:
@@ -41,44 +41,15 @@ jobs:
           ls;
           echo '\ndist:'
           ls dist
-  
-build_linux:
-
+  build_linux:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
       -name: write_file
         run: |
-          echo 'FROM quay.io/pypa/manylinux_2_24_x86_64
-
-          # 设置工作目录
-          WORKDIR /app
-
-          # 复制你的源代码到容器中
-          COPY . .
-
-          # 安装依赖、构建 wheel 等操作
-          RUN pip install wheel setuptools Cython
-          RUN python setup.py bdist_wheel
-          ' > Dockerfile
-
-      - name: 构建 Docker 镜像并生成 wheel 文件
-        run: |
-          docker build -t wheel_builder .
-          docker run --name my-python-app-container wheel_builder
-
-      - name: 导出生成的 wheel 文件
-        run: |
-          mkdir wheel_output
-          docker cp my-python-app-container:/app/dist/* wheel_output/
-
-      - name: 上传生成的 wheel 文件
-        uses: actions/upload-artifact@v4
-        with:
-          name: python-wheels
-          path: wheel_output
+          echo hello
+          '
   create_release:
     runs-on: ubuntu-latest
     needs: build
