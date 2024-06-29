@@ -5,7 +5,7 @@ with open("./README.md",mode='r',encoding='utf-8') as f:
     des = f.read()
 extensions = [
     Extension(
-        "hashmap",
+        "thzhashmap.hashmap",
         sources=["thzhashmap/hashmap.pyx", "thzhashmap/hashmap_c.cpp","thzhashmap/__init__.pyx"],
         language="c++",
             )
@@ -14,7 +14,7 @@ extensions = [
 setup(
     name="ThzHashMap",
     ext_modules=cythonize(extensions),
-    version="1.0.2",               # 版本号
+    version="1.0.3",               # 版本号
     author="Sen",
     package=['thzhashmap'],
     package_data={"thzhashmap": ["thzhashmap/*.pyx"]},
