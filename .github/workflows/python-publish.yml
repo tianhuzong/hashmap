@@ -94,9 +94,16 @@ jobs:
       - name: Download artifacts from the release
         uses: actions/download-artifact@v4
         with:
-          path: dist/
+          path: dists/
       - name: ls_file
         run: ls;ls -lah dist;ls dist/**/*
+      - name: move_file
+        run: |
+          mkdir dist
+          cd dists
+          mv ./dist-*/* ../dist
+          cd ..
+          ls -lah dist
       - name: Publish to PyPI
         uses: pypa/gh-action-pypi-publish@v1.9.0
         with:
