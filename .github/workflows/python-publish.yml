@@ -28,9 +28,10 @@ jobs:
           pip install wheel Cython setuptools
           python setup.py bdist_wheel
       - name: fix_linux_wheel
+        if: runner.os == 'Linux' && matrix.runs-on == 'ubuntu-latest'
         run: |
           pip install auditwheel
-          auditwheel repair ThzHashMap-*-*-*-linux_*.whl
+          auditwheel repair dist/ThzHashMap-*-*-*-linux_*.whl
           ls
 
 
