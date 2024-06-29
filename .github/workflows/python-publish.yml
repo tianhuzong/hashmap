@@ -96,7 +96,7 @@ jobs:
         with:
           path: dists/
       - name: ls_file
-        run: ls;ls -lah dist;ls dist/**/*
+        run: ls;ls -lah dists;ls dists/**/*
       - name: move_file
         run: |
           mkdir dist
