@@ -47,10 +47,11 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-      -name: write_file
+      - name: write_file
         run: |
           echo hello
-          '
+          gcc -v
+
   create_release:
     runs-on: ubuntu-latest
     needs: build
