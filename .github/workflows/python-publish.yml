@@ -100,10 +100,10 @@ jobs:
         with:
           path: dist/
       - name: ls_file
-        run: ls;ls dist
+        run: ls;ls -lah dist;ls dist/**/*
       - name: Publish to PyPI
         uses: pypa/gh-action-pypi-publish@v1.9.0
         with:
           user: __token__
           password: ${{ secrets.PYPI_API_TOKEN }}
-          packages-dir: dist/
+          packages-dir: dist/**/*
