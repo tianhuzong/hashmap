@@ -42,7 +42,7 @@ jobs:
           echo '\ndist:'
           ls dist
   
-  build_linux:
+build_linux:
 
     runs-on: ubuntu-latest
 
