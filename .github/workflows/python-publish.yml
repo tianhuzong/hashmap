@@ -27,7 +27,11 @@ jobs:
           python -m pip install --upgrade pip
           pip install wheel Cython setuptools
           python setup.py bdist_wheel
-
+      - name: fix_linux_wheel
+        run: |
+          pip install auditwheel
+          auditwheel repair ThzHashMap-*-*-*-linux_*.whl
+          ls
 
 
       - name: Upload artifact
