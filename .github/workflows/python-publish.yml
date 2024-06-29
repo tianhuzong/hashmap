@@ -44,10 +44,6 @@ jobs:
 
   create_release:
     runs-on: ubuntu-latest
-    strategy:
-          matrix:
-            os: [windows-latest, ubuntu-latest, macos-latest]
-            python-version: ['3.8', '3.9', '3.10', '3.11', '3.12']
     needs: build
     steps:
       - name: Checkout code
