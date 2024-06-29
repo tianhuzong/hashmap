@@ -43,44 +43,42 @@ jobs:
           ls dist
   
   build_linux:
-    container-job:
-      runs-on: ubuntu-latest
-      services:
-        docker:
-          image: pypa/manylinux_2_24_x86_64
-      steps:
-        - name: Checkout code
-          uses: actions/checkout@v2
-        -name: write_file
-          run: |
-            echo 'FROM quay.io/pypa/manylinux_2_24_x86_64
 
-            # 设置工作目录
-            WORKDIR /app
+    runs-on: ubuntu-latest
 
-            # 复制你的源代码到容器中
-            COPY . .
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      -name: write_file
+        run: |
+          echo 'FROM quay.io/pypa/manylinux_2_24_x86_64
 
-            # 安装依赖、构建 wheel 等操作
-            RUN pip install wheel setuptools Cython
-            RUN python setup.py bdist_wheel
-            ' > Dockerfile
+          # 设置工作目录
+          WORKDIR /app
 
-        - name: 构建 Docker 镜像并生成 wheel 文件
-          run: |
-            docker build -t wheel_builder .
-            docker run --name my-python-app-container wheel_builder
+          # 复制你的源代码到容器中
+          COPY . .
 
-        - name: 导出生成的 wheel 文件
-          run: |
-            mkdir wheel_output
-            docker cp my-python-app-container:/app/dist/* wheel_output/
+          # 安装依赖、构建 wheel 等操作
+          RUN pip install wheel setuptools Cython
+          RUN python setup.py bdist_wheel
+          ' > Dockerfile
 
-        - name: 上传生成的 wheel 文件
-          uses: actions/upload-artifact@v4
-          with:
-            name: python-wheels
-            path: wheel_output
+      - name: 构建 Docker 镜像并生成 wheel 文件
+        run: |
+          docker build -t wheel_builder .
+          docker run --name my-python-app-container wheel_builder
+
+      - name: 导出生成的 wheel 文件
+        run: |
+          mkdir wheel_output
+          docker cp my-python-app-container:/app/dist/* wheel_output/
+
+      - name: 上传生成的 wheel 文件
+        uses: actions/upload-artifact@v4
+        with:
+          name: python-wheels
+          path: wheel_output
   create_release:
     runs-on: ubuntu-latest
     needs: build
