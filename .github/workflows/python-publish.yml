@@ -67,6 +67,12 @@ jobs:
           pip install -U Cython wheel setuptools
           python setup.py sdist
 
+      - name: Download all artifacts
+        uses: actions/download-artifact@v4
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          #name: dist-${{ matrix.os }}-${{ matrix.python-version }}
+          path: dist/
 
       - name: Read release notes
         id: read_notes
@@ -99,13 +105,6 @@ jobs:
         with:
           name: source_package
           path: ./dist/*.tar.gz
-      - name: Download all artifacts
-        uses: actions/download-artifact@v4
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          #name: dist-${{ matrix.os }}-${{ matrix.python-version }}
-          path: dist/
-      
 
   publish_to_pypi:
     runs-on: ubuntu-latest
