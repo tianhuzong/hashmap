@@ -32,7 +32,7 @@ jobs:
         run: |
           pip install auditwheel
           mkdir distss
-          auditwheel repair dist/ThzHashMap-*-*-*-linux_*.whl  -w ./distss
+          auditwheel repair dist/ThzHashMap-*-*-*-linux_*.whl --plat manylinux_2_17_x86_64 -w ./distss
           ls -lah
           ls dist
           rm -r dist
