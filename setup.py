@@ -14,7 +14,7 @@ extensions = [
 setup(
     name="ThzHashMap",
     ext_modules=cythonize(extensions),
-    version="1.0.3",               # 版本号
+    version="1.0.4",               # 版本号
     author="Sen",
     package=['thzhashmap'],
     package_data={"thzhashmap": ["thzhashmap/*.pyx"]},
@@ -25,5 +25,11 @@ setup(
     author_email="tianhuzong@qq.com",
     url="https://github.com/tianhuzong/hashmap",
     license="MIT",
-    
+    classifiers=[
+        "Development Status :: 5 - Production/Stable",
+        "License :: OSI Approved :: MIT License",
+        "Programming Language :: Cython",
+        "Programming Language :: C++",
+        "Programming Language :: Python :: 3",
+    ]
 )
